@@ -14,19 +14,21 @@
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
+    int r = 1;
+
     FILE* f = fopen(path, "r");
 
     if(f == NULL)
     {
         printf("Problema al abrir el archivo\n");
-        return -1;
+        r = -1;
     }
     else
     {
-        parser_EmployeeFromText(f, pArrayListEmployee);
+        r = parser_EmployeeFromText(f, pArrayListEmployee);
     }
 
-    return 1;
+    return r;
 }
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
@@ -210,6 +212,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     mostrarEmployees(pArrayListEmployee);
 
     printf("\nIngrese el ID del empleado a modificar: ");
+    fflush(stdin);
     scanf("%d", &id);
 
     indice = buscarId(id, pArrayListEmployee);
@@ -219,7 +222,6 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
         auxEmp = (Employee*)ll_get(pArrayListEmployee, indice);
 
         mostrarEmployee(auxEmp);
-
 
         error = submenuModificar(auxEmp);
     }

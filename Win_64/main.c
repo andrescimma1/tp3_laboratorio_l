@@ -91,13 +91,15 @@ int main()
             case 6:
                 mostrarEmployees(listaEmpleados);
                 break;
-            case 8:
+            /*case 8:
                 r = controller_saveAsText("data.csv", listaEmpleados);
                 if(r == -1)
                 {
                     exit(EXIT_FAILURE);
                 }
-                break;
+                break;*/
+            default:
+                printf("Opcion incorrecta\n\n");
         }
     }while(option != 10);
 

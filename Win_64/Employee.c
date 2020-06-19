@@ -387,11 +387,12 @@ int compararEmpleadosPorSueldo(void* emp1, void* emp2)
 int buscarId(int id, LinkedList* pArrayListEmployee)
 {
     int indice = -1;
+    int salir = 0;
     int tam = ll_len(pArrayListEmployee);
     Employee* auxEmpp;
 
 
-    if(pArrayListEmployee != NULL)
+    if(pArrayListEmployee != NULL && salir == 0)
     {
         for(int i=0; i<tam; i++)
         {
@@ -399,12 +400,14 @@ int buscarId(int id, LinkedList* pArrayListEmployee)
             if(auxEmpp->id == id)
             {
                 indice = i;
+                printf("Entra");
+                break;
             }
         }
 
     }
 
-    printf("Entra");
+
 
     return indice;
 }

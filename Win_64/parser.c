@@ -25,8 +25,11 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
         if(cant == 4)
         {
             auxEmp = employee_newParametros(buffer[0], buffer[1], buffer[2], buffer[3]);
-            ll_add(pArrayListEmployee, auxEmp);
-            todoOk = 1;
+            if(auxEmp != NULL)
+            {
+                ll_add(pArrayListEmployee, auxEmp);
+                todoOk = 1;
+            }
         }
     }
 
