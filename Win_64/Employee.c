@@ -195,6 +195,105 @@ int mostrarEmployees(LinkedList* lista)
     return error;
 }
 
+int submenuModificar(Employee* auxEmpp)
+{
+    int todoOk = 0;
+    int opcion;
+    int error = 1;
+    char nombre[20];
+    int horasTrabajadas;
+    int sueldo;
+
+    printf("\n*** Que desea modificar? ***\n\n");
+    printf("1. Nombre\n");
+    printf("2. Horas Trabajadas\n");
+    printf("3. Sueldo\n");
+    printf("\n\n");
+
+    do
+    {
+        printf("Ingrese opcion: ");
+        fflush(stdin);
+        scanf("%d", &opcion);
+
+        if(opcion == 1 || opcion == 2 || opcion == 3)
+        {
+            todoOk = 1;
+        }
+        else
+        {
+            printf("Error, ingrese opcion: ");
+            fflush(stdin);
+            scanf("%d", &opcion);
+        }
+    }while(todoOk != 1);
+
+    switch(opcion)
+    {
+        case 1:     do
+                        {
+                            printf("Ingrese nombre: ");
+                            fflush(stdin);
+                            gets(nombre);
+
+                            error = employee_setNombre(auxEmpp, nombre);
+
+                            if(error == 1)
+                            {
+                                printf("Error, ingrese nombre: ");
+                                fflush(stdin);
+                                gets(nombre);
+
+                                error = employee_setNombre(auxEmpp, nombre);
+                            }
+                        }while(error != 0);
+                        break;
+
+            case 2:     do
+                        {
+                            printf("Ingrese nuevas horas trabajadas: ");
+                            fflush(stdin);
+                            scanf("%d", &horasTrabajadas);
+
+                            error = employee_setHorasTrabajadas(auxEmpp, horasTrabajadas);
+
+                            if(error == 1)
+                            {
+                                printf("Error, ingrese nuevas horas trabajadas: ");
+                                fflush(stdin);
+                                scanf("%d", &horasTrabajadas);
+
+                                error = employee_setHorasTrabajadas(auxEmpp, horasTrabajadas);
+                            }
+                        }while(error != 0);
+                        break;
+
+            case 3:     do
+                        {
+                            printf("Ingrese sueldo: ");
+                            fflush(stdin);
+                            scanf("%d", &sueldo);
+
+                            error = employee_setSueldo(auxEmpp, sueldo);
+
+                            if(error == 1)
+                            {
+                                printf("Error, ingrese sueldo: ");
+                                fflush(stdin);
+                                scanf("%d", &sueldo);
+
+                                error = employee_setSueldo(auxEmpp, sueldo);
+                            }
+                        }while(error != 0);
+                        break;
+
+            default: break;
+    }
+
+    return error;
+
+}
+
 
 int compararEmpleadosPorId(void* emp1, void* emp2)
 {
@@ -282,4 +381,30 @@ int compararEmpleadosPorSueldo(void* emp1, void* emp2)
     }
 
     return rta;
+}
+
+
+int buscarId(int id, LinkedList* pArrayListEmployee)
+{
+    int indice = -1;
+    int tam = ll_len(pArrayListEmployee);
+    Employee* auxEmpp;
+
+
+    if(pArrayListEmployee != NULL)
+    {
+        for(int i=0; i<tam; i++)
+        {
+            auxEmpp = (Employee*)ll_get(pArrayListEmployee, i);
+            if(auxEmpp->id == id)
+            {
+                indice = i;
+            }
+        }
+
+    }
+
+    printf("Entra");
+
+    return indice;
 }

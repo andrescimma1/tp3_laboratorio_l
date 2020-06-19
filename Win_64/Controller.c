@@ -191,38 +191,6 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     return 1;
 }
 
-int submenuModificar()
-{
-    int todoOk = 0;
-    int opcion;
-
-    printf("\n*** Que desea modificar? ***\n\n");
-    printf("1. Nombre\n");
-    printf("2. Horas Trabajadas\n");
-    printf("3. Sueldo\n");
-    printf("\n\n");
-
-    do
-    {
-        printf("Ingrese opcion: ");
-        fflush(stdin);
-        scanf("%d", &opcion);
-
-        if(opcion == 1 || opcion == 2 || opcion == 3)
-        {
-            todoOk = 1;
-        }
-        else
-        {
-            printf("Error, ingrese opcion: ");
-            fflush(stdin);
-            scanf("%d", &opcion);
-        }
-    }while(todoOk != 1);
-
-    return opcion;
-
-}
 
 
 /** \brief Modificar datos de empleado
@@ -235,14 +203,8 @@ int submenuModificar()
 int controller_editEmployee(LinkedList* pArrayListEmployee)
 {
     int id;
-    int todoOk = 0;
-    int todoOkNombre = 0;
-    int todoOkHorasTrabajadas = 0;
-    int todoOkSueldo = 0;
-    int tam = ll_len(pArrayListEmployee);
-    char nombre[20];
-    int horasTrabajadas;
-    int sueldo;
+    int indice;
+    int error = 1;
     Employee* auxEmp;
 
     mostrarEmployees(pArrayListEmployee);
@@ -250,95 +212,20 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     printf("\nIngrese el ID del empleado a modificar: ");
     scanf("%d", &id);
 
-    for(int i=0; i<tam; i++)
+    indice = buscarId(id, pArrayListEmployee);
+
+    if(indice != -1)
     {
-        auxEmp = ll_get(pArrayListEmployee, i);
+        auxEmp = (Employee*)ll_get(pArrayListEmployee, indice);
 
-        if(auxEmp->id == id && auxEmp != NULL)
-        {
-            mostrarEmployee(auxEmp);
-            switch(submenuModificar())
-            {
-                case 1:     do
-                            {
-                                printf("Ingrese nombre: ");
-                                fflush(stdin);
-                                gets(nombre);
+        mostrarEmployee(auxEmp);
 
-                                if(strlen(nombre) > 2 && strlen(nombre) < 20)
-                                {
-                                    todoOkNombre = 1;
-                                }
-                                else
-                                {
-                                    printf("Error, ingrese nombre: ");
-                                    fflush(stdin);
-                                    gets(nombre);
-                                }
-                            }while(todoOkNombre != 1);
-                            if(todoOkNombre == 1)
-                            {
-                                strcpy(auxEmp->nombre, nombre);
-                                todoOk = 1;
-                            }
 
-                            break;
-
-                case 2:     do
-                            {
-                                printf("Ingrese nuevas horas trabajadas: ");
-                                fflush(stdin);
-                                scanf("%d", &horasTrabajadas);
-
-                                if(horasTrabajadas > 2 && horasTrabajadas < 800)
-                                {
-                                    todoOkHorasTrabajadas = 1;
-                                }
-                                else
-                                {
-                                    printf("Error, ingrese nuevas horas trabajadas: ");
-                                    fflush(stdin);
-                                    scanf("%d", &horasTrabajadas);
-                                }
-                            }while(todoOkHorasTrabajadas != 1);
-                            if(todoOkHorasTrabajadas == 1)
-                            {
-                                auxEmp->horasTrabajadas = horasTrabajadas;
-                                todoOk = 1;
-                            }
-                            break;
-
-                case 3:     do
-                            {
-                                printf("Ingrese sueldo: ");
-                                fflush(stdin);
-                                scanf("%d", &sueldo);
-
-                                if(sueldo > 0 && sueldo < 800000)
-                                {
-                                    todoOkSueldo = 1;
-                                }
-                                else
-                                {
-                                    printf("Error, ingrese sueldo: ");
-                                    fflush(stdin);
-                                    scanf("%d", &sueldo);
-                                }
-                            }while(todoOkSueldo != 1);
-                            if(todoOkSueldo == 1)
-                            {
-                                auxEmp->sueldo = sueldo;
-                                todoOk = 1;
-                            }
-                            break;
-
-                default: break;
-
-            }
-        }
+        error = submenuModificar(auxEmp);
     }
 
-    if(todoOk == 1)
+
+    if(error == 0)
     {
         printf("\nDatos modificados con exito!!\n\n");
     }
@@ -360,7 +247,27 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int id;
+    int indice;
+
+    printf("Ingrese el id del empleado a eliminar: ");
+    fflush(stdin);
+    scanf("%d", &id);
+
+    indice = buscarId(id, pArrayListEmployee);
+
+    if(indice == -1)
+    {
+        printf("ID incorrecta\n\n");
+    }
+    else
+    {
+        ll_remove(pArrayListEmployee, indice);
+        printf("Empleado eliminado con exito!\n\n");
+        return 1;
+    }
+
+    return -1;
 }
 
 /** \brief Listar empleados

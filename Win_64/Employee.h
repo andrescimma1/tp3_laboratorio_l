@@ -33,11 +33,16 @@ int employee_getSueldo(Employee* this,int* sueldo);
 int mostrarEmployee(Employee* employee);
 int mostrarEmployees(LinkedList* lista);
 
+int buscarId(int id, LinkedList* pArrayListEmployee);
+
+int submenuModificar(Employee* auxEmpp);
+
 
 int compararEmpleadosPorId(void* emp1, void* emp2);
 int compararEmpleadosPorNombre(void* emp1, void* emp2);
 int compararEmpleadosPorHorasTrabajadas(void* emp1, void* emp2);
 int compararEmpleadosPorSueldo(void* emp1, void* emp2);
+
 
 
 #endif // employee_H_INCLUDED

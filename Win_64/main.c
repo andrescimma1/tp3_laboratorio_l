@@ -79,7 +79,14 @@ int main()
                 controller_addEmployee(listaEmpleados);
                 break;
             case 4:
-                controller_editEmployee(listaEmpleados);
+                r = controller_editEmployee(listaEmpleados);
+                break;
+            case 5:
+                r = controller_removeEmployee(listaEmpleados);
+                if(r == -1)
+                {
+                    exit(EXIT_FAILURE);
+                }
                 break;
             case 6:
                 mostrarEmployees(listaEmpleados);
@@ -108,7 +115,7 @@ int menu()
     printf("2. Cargar los datos de los empleados desde el archivo data.bin (modo binario).\n");
     printf("3. Alta de empleado.\n");
     printf("4. Modificar datos de empleado\n");
-
+    printf("5. Baja de empleado\n");
     printf("6. Listar empleados\n");
 
 
