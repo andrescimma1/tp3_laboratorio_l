@@ -28,6 +28,8 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
         r = parser_EmployeeFromText(f, pArrayListEmployee);
     }
 
+    fclose(f);
+
     return r;
 }
 
@@ -53,22 +55,6 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
         return -1;
     }
 
-    fscanf(f, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
-    printf("%s                 %s     %s    %s\n", buffer[0], buffer[1], buffer[2], buffer[3]);
-
-    while(!feof(f))
-    {
-        cant = fscanf(f, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
-
-        if(cant == 4)
-        {
-            printf("%s    %20s       %s             %s\n", buffer[0], buffer[1], buffer[2], buffer[3]);
-        }
-        else
-        {
-            break;
-        }
-    }
 
     fclose(f);
 
@@ -204,6 +190,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_editEmployee(LinkedList* pArrayListEmployee)
 {
+    int r = -1;
     int id;
     int indice;
     int error = 1;
@@ -229,6 +216,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
     if(error == 0)
     {
+        r = 1;
         printf("\nDatos modificados con exito!!\n\n");
     }
     else
@@ -237,7 +225,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     }
 
 
-    return 1;
+    return r;
 }
 
 /** \brief Baja de empleado
@@ -249,8 +237,11 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
+    int r = -1;
     int id;
     int indice;
+    char seguro;
+    Employee* auxEmp;
 
     printf("Ingrese el id del empleado a eliminar: ");
     fflush(stdin);
@@ -264,12 +255,30 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
     }
     else
     {
-        ll_remove(pArrayListEmployee, indice);
-        printf("Empleado eliminado con exito!\n\n");
-        return 1;
+        auxEmp = (Employee*)ll_get(pArrayListEmployee, indice);
+        mostrarEmployee(auxEmp);
+        printf("Seguro que desea eliminar este empleado? s/n: ");
+        fflush(stdin);
+        scanf("%c", &seguro);
+        if(seguro == 's')
+        {
+            ll_remove(pArrayListEmployee, indice);
+            printf("Empleado eliminado con exito!\n\n");
+            r = 1;
+        }
+        else if(seguro == 'n')
+        {
+            printf("No se ha eliminado al empleado\n\n");
+            r = 1;
+        }
+        else
+        {
+            printf("Error, es 's' o 'n'\n\n");
+            r = 1;
+        }
     }
 
-    return -1;
+    return r;
 }
 
 /** \brief Listar empleados
@@ -281,7 +290,11 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int r;
+
+    r = mostrarEmployees(pArrayListEmployee);
+
+    return r;
 }
 
 /** \brief Ordenar empleados
@@ -293,7 +306,11 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int r;
+
+    r = submenuSorts(pArrayListEmployee);
+
+    return r;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).

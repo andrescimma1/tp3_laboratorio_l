@@ -165,7 +165,7 @@ int mostrarEmployee(Employee* employee)
 
 int mostrarEmployees(LinkedList* lista)
 {
-    int error = 1;
+    int r = -1;
     int flag = 0;
 
     int tam = ll_len(lista); //Contiene el tamaño de la lista
@@ -189,10 +189,10 @@ int mostrarEmployees(LinkedList* lista)
             printf("No hay empleados para mostrar\n");
         }
         printf("\n\n");
-        error = 0;
+        r = 1;
     }
 
-    return error;
+    return r;
 }
 
 int submenuModificar(Employee* auxEmpp)
@@ -327,7 +327,7 @@ int compararEmpleadosPorNombre(void* emp1, void* emp2)
     {
         rta = 0;
     }
-    else if(strcmp(a->nombre, b->nombre) > 1)
+    else if(strcmp(a->nombre, b->nombre) < 1)
     {
         rta = -1;
     }
@@ -400,14 +400,59 @@ int buscarId(int id, LinkedList* pArrayListEmployee)
             if(auxEmpp->id == id)
             {
                 indice = i;
-                printf("Entra");
                 break;
             }
         }
 
     }
 
-
-
     return indice;
+}
+
+
+
+int submenuSorts(LinkedList* pArrayListEmployee)
+{
+    int opcion;
+    int r = -1;
+
+    printf("*** MENU DE ORDEN ***\n\n");
+    printf("1. Ordenar por id\n");
+    printf("2. Ordenar por nombre\n");
+    printf("3. Ordenar por horas trabajas\n");
+    printf("4. Ordenar por sueldo\n\n");
+    printf("Ingrese opcion: ");
+    fflush(stdin);
+    scanf("%d", &opcion);
+
+    if(opcion == 1)
+    {
+        ll_sort(pArrayListEmployee, compararEmpleadosPorId, 1);
+        printf("Empleados ordenados con exito!\n\n");
+        r = 1;
+    }
+    else if(opcion == 2)
+    {
+        ll_sort(pArrayListEmployee, compararEmpleadosPorNombre, 1);
+        printf("Empleados ordenados con exito!\n\n");
+        r = 1;
+    }
+    else if(opcion == 3)
+    {
+        ll_sort(pArrayListEmployee, compararEmpleadosPorHorasTrabajadas, 1);
+        printf("Empleados ordenados con exito!\n\n");
+        r = 1;
+    }
+    else if(opcion == 4)
+    {
+        ll_sort(pArrayListEmployee, compararEmpleadosPorSueldo, 1);
+        printf("Empleados ordenados con exito!\n\n");
+        r = 1;
+    }
+    else
+    {
+        printf("Opcion incorrecta\n\n");
+    }
+
+    return r;
 }

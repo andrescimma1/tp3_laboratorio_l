@@ -36,6 +36,7 @@ int mostrarEmployees(LinkedList* lista);
 int buscarId(int id, LinkedList* pArrayListEmployee);
 
 int submenuModificar(Employee* auxEmpp);
+int submenuSorts(LinkedList* pArrayListEmployee);
 
 
 int compararEmpleadosPorId(void* emp1, void* emp2);

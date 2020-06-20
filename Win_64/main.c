@@ -64,6 +64,7 @@ int main()
                 r = controller_loadFromText("data.csv", listaEmpleados);
                 if(r == -1)
                 {
+                    printf("No hay espacio en la memoria\n\n");
                     exit(EXIT_FAILURE);
                 }
                 break;
@@ -72,24 +73,49 @@ int main()
                 r = controller_loadFromBinary("data.bin", listaEmpleados);
                 if(r == -1)
                 {
+                    printf("No hay espacio en la memoria\n\n");
                     exit(EXIT_FAILURE);
                 }
                 break;
             case 3:
-                controller_addEmployee(listaEmpleados);
+                r = controller_addEmployee(listaEmpleados);
+                if(r == -1)
+                {
+                    printf("No hay espacio en la memoria\n\n");
+                    exit(EXIT_FAILURE);
+                }
                 break;
             case 4:
                 r = controller_editEmployee(listaEmpleados);
+                if(r == -1)
+                {
+                    printf("Error al editar el empleado\n\n");
+                    exit(EXIT_FAILURE);
+                }
                 break;
             case 5:
                 r = controller_removeEmployee(listaEmpleados);
                 if(r == -1)
                 {
+                    printf("Error al remover el empleado\n\n");
                     exit(EXIT_FAILURE);
                 }
                 break;
             case 6:
-                mostrarEmployees(listaEmpleados);
+                r = controller_ListEmployee(listaEmpleados);
+                if (r == -1)
+                {
+                    printf("Error al mostrar empleados\n\n");
+                    exit(EXIT_FAILURE);
+                }
+                break;
+            case 7:
+                r = controller_sortEmployee(listaEmpleados);
+                if(r == -1)
+                {
+                    printf("Error al ordenar empleados\n\n");
+                    exit(EXIT_FAILURE);
+                }
                 break;
             /*case 8:
                 r = controller_saveAsText("data.csv", listaEmpleados);
@@ -119,8 +145,7 @@ int menu()
     printf("4. Modificar datos de empleado\n");
     printf("5. Baja de empleado\n");
     printf("6. Listar empleados\n");
-
-
+    printf("7. Ordenar empleados\n");
     printf("8. Guardar los datos de los empleados en el archivo data.csv (modo texto).\n");
 
     printf("\n\n");
