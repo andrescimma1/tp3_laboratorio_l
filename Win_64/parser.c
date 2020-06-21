@@ -56,21 +56,32 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 {
     int r = -1;
     int cant;
-    char buffer[4][1500];
     Employee* auxEmp;
-
-    fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
 
     while(!feof(pFile))
     {
-        cant = fscanf(pFile, "%[^,],%[^,],%[^,],%[^\n]\n", buffer[0], buffer[1], buffer[2], buffer[3]);
-        if(cant == 4)
+        auxEmp = employee_new();
+
+        cant = fread(auxEmp, sizeof(Employee*), 1, pFile);
+
+        if(cant > 0)
         {
-            auxEmp = employee_newParametros(buffer[0], buffer[1], buffer[2], buffer[3]);
             if(auxEmp != NULL)
             {
                 ll_add(pArrayListEmployee, auxEmp);
                 r = 1;
+            }
+        }
+        else
+        {
+            if(!feof(pFile))
+            {
+                break;
+            }
+            else
+            {
+                free(auxEmp);
+                break;
             }
         }
     }

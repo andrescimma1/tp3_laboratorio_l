@@ -117,13 +117,20 @@ int main()
                     exit(EXIT_FAILURE);
                 }
                 break;
-            /*case 8:
+            case 8:
                 r = controller_saveAsText("data.csv", listaEmpleados);
+                if(r == -1)
+                {
+                    printf("Error\n\n");
+                    exit(EXIT_FAILURE);
+                }
+                break;
+            case 9:
+                r = controller_saveAsBinary("data.bin", listaEmpleados);
                 if(r == -1)
                 {
                     exit(EXIT_FAILURE);
                 }
-                break;*/
             default:
                 printf("Opcion incorrecta\n\n");
         }
