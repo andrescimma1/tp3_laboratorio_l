@@ -316,7 +316,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
-    int r = -1;
+    int r = 1;
     int tam = ll_len(pArrayListEmployee);
     FILE* f;
     Employee* auxEmp;
@@ -331,17 +331,20 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
     {
         fprintf(f, "id,nombre,horasTrabajadas,sueldo\n");
 
-        for(int i = 0; i<tam; i++)
+        for(int i=0; i<tam; i++)
         {
             auxEmp = (Employee*)ll_get(pArrayListEmployee, i);
-            fprintf("%d,%s,%d,%d \n", auxEmp->id, auxEmp->nombre, auxEmp->horasTrabajadas, auxEmp->sueldo);
+            fprintf(f, "%d,%s,%d,%d \n", auxEmp->id, auxEmp->nombre, auxEmp->horasTrabajadas, auxEmp->sueldo);
             r = 1;
-            printf("%d", i);
         }
     }
 
-    fclose(f);
+    if(r == 1)
+    {
+        printf("Se han guardado con exito!!\n\n");
+    }
 
+    fclose(f);
 
     return r;
 }
@@ -355,9 +358,34 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
+    int r = -1;
+    FILE* f;
+    int tam;
+    tam = ll_len(pArrayListEmployee);
+    Employee* auxEmp;
 
+    f = fopen(path, "wb");
 
-    return 1;
+    if(f == NULL)
+    {
+        printf("Ha ocurrido un error\n\n");
+    }
+    else
+    {
+        for(int i = 0; i<tam; i++)
+        {
+            auxEmp = (Employee*)ll_get(pArrayListEmployee, i);
+            fwrite(auxEmp, sizeof(Employee), 1, f);
+            r = 1;
+        }
+    }
+
+    if(r == 1)
+    {
+        printf("Se han guardado con exito!!\n\n");
+    }
+
+    return r;
 }
 
 

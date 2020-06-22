@@ -121,7 +121,7 @@ int main()
                 r = controller_saveAsText("data.csv", listaEmpleados);
                 if(r == -1)
                 {
-                    printf("Error\n\n");
+                    printf("Error al guardar empleados\n\n");
                     exit(EXIT_FAILURE);
                 }
                 break;
@@ -129,8 +129,10 @@ int main()
                 r = controller_saveAsBinary("data.bin", listaEmpleados);
                 if(r == -1)
                 {
+                    printf("Error al guardar empleados\n\n");
                     exit(EXIT_FAILURE);
                 }
+                break;
             default:
                 printf("Opcion incorrecta\n\n");
         }
@@ -154,6 +156,7 @@ int menu()
     printf("6. Listar empleados\n");
     printf("7. Ordenar empleados\n");
     printf("8. Guardar los datos de los empleados en el archivo data.csv (modo texto).\n");
+    printf("9. Guardar los datos de los empleados en el archivo data.bin (modo binario).\n");
 
     printf("\n\n");
     printf("Ingrese opcion: ");
