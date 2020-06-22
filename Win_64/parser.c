@@ -61,8 +61,7 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
     while(!feof(pFile))
     {
         auxEmp = employee_new();
-
-        cant = fread(auxEmp, sizeof(Employee*), 1, pFile);
+        cant = fread(auxEmp, sizeof(Employee), 1, pFile);
 
         if(cant > 0)
         {

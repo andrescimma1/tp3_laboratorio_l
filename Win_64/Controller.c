@@ -42,8 +42,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
-    char buffer[4][1500];
-    int cant;
+    int r = -1;
 
     FILE* f;
 
@@ -52,13 +51,17 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
     if(f == NULL)
     {
         printf("No se pudo abrir el archivo\n");
-        return -1;
+        r = -1;
+    }
+    else
+    {
+        r = parser_EmployeeFromBinary(f, pArrayListEmployee);
     }
 
 
     fclose(f);
 
-    return 1;
+    return r;
 }
 
 /** \brief Alta de empleados
@@ -375,8 +378,11 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
         for(int i = 0; i<tam; i++)
         {
             auxEmp = (Employee*)ll_get(pArrayListEmployee, i);
-            fwrite(auxEmp, sizeof(Employee), 1, f);
-            r = 1;
+            if(auxEmp != NULL)
+            {
+                fwrite(auxEmp, sizeof(Employee), 1, f);
+                r = 1;
+            }
         }
     }
 
@@ -387,6 +393,3 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 
     return r;
 }
-
-
-
