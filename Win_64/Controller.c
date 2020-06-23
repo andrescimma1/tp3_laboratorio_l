@@ -15,7 +15,6 @@
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
     int r = 1;
-
     FILE* f = fopen(path, "r");
 
     if(f == NULL)
