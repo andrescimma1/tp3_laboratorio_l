@@ -1,7 +1,13 @@
 #include "Employee.h"
 
 
-
+/** \brief Crea un puntero a empleado en la memoria dinamica y lo inicializa todo en 0 o "".
+ *
+ * \param Employee* newEmployee;
+ * \param
+ * \return newEmployee;
+ *
+ */
 Employee* employee_new()
 {
     Employee* newEmployee;
@@ -19,6 +25,14 @@ Employee* employee_new()
 }
 
 
+
+/** \brief Crea un puntero a empleado y valida los datos.
+ *
+ * \param Employee* newEmployee;
+ * \param
+ * \return newEmployee;
+ *
+ */
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr, char* sueldoStr)
 {
     Employee* newEmployee;
@@ -43,6 +57,15 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
 
 void employee_delete();
 
+
+
+/** \brief Valida el id puesto como segundo parámetro y se lo asigna al empleado
+ *
+ * \param int error = 1;
+ * \param
+ * \return error;
+ *
+ */
 int employee_setId(Employee* this,int id)
 {
     int error = 1;
@@ -56,6 +79,15 @@ int employee_setId(Employee* this,int id)
     return error;
 }
 
+
+
+/** \brief Obtiene el id del empleado pasado como primer parámetro.
+ *
+ * \param int error = 1;
+ * \param
+ * \return error;
+ *
+ */
 int employee_getId(Employee* this,int* id)
 {
     int error = 1;
@@ -69,6 +101,15 @@ int employee_getId(Employee* this,int* id)
     return error;
 }
 
+
+
+/** \brief Valida el nombre puesto como segundo parámetro y se lo asigna al empleado
+ *
+ * \param int error = 1;
+ * \param
+ * \return error;
+ *
+ */
 int employee_setNombre(Employee* this,char* nombre)
 {
     int error = 1;
@@ -83,6 +124,14 @@ int employee_setNombre(Employee* this,char* nombre)
 }
 
 
+
+/** \brief Obtiene el nombre del empleado pasado como primer parámetro.
+ *
+ * \param int error = 1;
+ * \param
+ * \return error;
+ *
+ */
 int employee_getNombre(Employee* this,char* nombre)
 {
     int error = 1;
@@ -96,6 +145,15 @@ int employee_getNombre(Employee* this,char* nombre)
     return error;
 }
 
+
+
+/** \brief Valida las horas trabajadas puestas como segundo parámetro y se lo asigna al empleado
+ *
+ * \param int error = 1;
+ * \param
+ * \return error;
+ *
+ */
 int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 {
     int error = 1;
@@ -110,6 +168,14 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 }
 
 
+
+/** \brief Obtiene las horas trabajadas del empleado pasadas como primer parámetro.
+ *
+ * \param int error = 1;
+ * \param
+ * \return error;
+ *
+ */
 int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 {
     int error = 1;
@@ -123,6 +189,14 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
     return error;
 }
 
+
+/** \brief Valida el sueldo como segundo parámetro y se lo asigna al empleado
+ *
+ * \param int error = 1;
+ * \param
+ * \return error;
+ *
+ */
 int employee_setSueldo(Employee* this,int sueldo)
 {
     int error = 1;
@@ -137,6 +211,14 @@ int employee_setSueldo(Employee* this,int sueldo)
 }
 
 
+
+/** \brief Obtiene el sueldo del empleado pasado como primer parámetro.
+ *
+ * \param int error = 1;
+ * \param
+ * \return error;
+ *
+ */
 int employee_getSueldo(Employee* this,int* sueldo)
 {
     int error = 1;
@@ -151,6 +233,14 @@ int employee_getSueldo(Employee* this,int* sueldo)
 }
 
 
+
+/** \brief Muestra un empleado
+ *
+ * \param int error = 1;
+ * \param
+ * \return error;
+ *
+ */
 int mostrarEmployee(Employee* employee)
 {
     int error = 1;
@@ -165,6 +255,16 @@ int mostrarEmployee(Employee* employee)
 }
 
 
+
+/** \brief Muestra los empleados de la lista.
+ *
+ * \param int r = -1;
+ * \param int flag = 0;
+ * \param int tam = ll_len(lista);
+ * \param Employee* auxEmp;
+ * \return r;
+ *
+ */
 int mostrarEmployees(LinkedList* lista)
 {
     int r = -1;
@@ -197,6 +297,16 @@ int mostrarEmployees(LinkedList* lista)
     return r;
 }
 
+
+/** \brief Crea un menu para las modificaciones.
+ *
+ * \param int todoOk = 0;
+ * \param char nombre[20];
+ * \param int opcion, horasTrabajadas, sueldo;
+ * \param int error = 1;
+ * \return error;
+ *
+ */
 int submenuModificar(Employee* auxEmpp)
 {
     int todoOk = 0;
@@ -297,6 +407,15 @@ int submenuModificar(Employee* auxEmpp)
 }
 
 
+
+/** \brief Compara el id de los empleados
+ *
+ * \param int rta;
+ * \param Employee* a = (Employee*)emp1;
+ * \param Employee* b = (Employee*)emp2;
+ * \return rta;
+ *
+ */
 int compararEmpleadosPorId(void* emp1, void* emp2)
 {
     int rta;
@@ -319,6 +438,16 @@ int compararEmpleadosPorId(void* emp1, void* emp2)
     return rta;
 }
 
+
+
+/** \brief Compara el nombre de los empleados
+ *
+ * \param int rta;
+ * \param Employee* a = (Employee*)emp1;
+ * \param Employee* b = (Employee*)emp2;
+ * \return rta;
+ *
+ */
 int compararEmpleadosPorNombre(void* emp1, void* emp2)
 {
     int rta;
@@ -341,6 +470,16 @@ int compararEmpleadosPorNombre(void* emp1, void* emp2)
     return rta;
 }
 
+
+
+/** \brief Compara las horas trabajadas de los empleados
+ *
+ * \param int rta;
+ * \param Employee* a = (Employee*)emp1;
+ * \param Employee* b = (Employee*)emp2;
+ * \return rta;
+ *
+ */
 int compararEmpleadosPorHorasTrabajadas(void* emp1, void* emp2)
 {
     int rta;
@@ -363,6 +502,16 @@ int compararEmpleadosPorHorasTrabajadas(void* emp1, void* emp2)
     return rta;
 }
 
+
+
+/** \brief Compara el sueldo de los empleados
+ *
+ * \param int rta;
+ * \param Employee* a = (Employee*)emp1;
+ * \param Employee* b = (Employee*)emp2;
+ * \return rta;
+ *
+ */
 int compararEmpleadosPorSueldo(void* emp1, void* emp2)
 {
     int rta;
@@ -386,13 +535,22 @@ int compararEmpleadosPorSueldo(void* emp1, void* emp2)
 }
 
 
+
+/** \brief Busca el id de un empleado
+ *
+ * \param int indice = -1;
+ * \param int salir = 0;
+ * \param int tam = ll_len(pArrayListEmployee);
+ * \param Employee* auxEmpp;
+ * \return
+ *
+ */
 int buscarId(int id, LinkedList* pArrayListEmployee)
 {
     int indice = -1;
     int salir = 0;
     int tam = ll_len(pArrayListEmployee);
     Employee* auxEmpp;
-
 
     if(pArrayListEmployee != NULL && salir == 0)
     {
@@ -413,6 +571,13 @@ int buscarId(int id, LinkedList* pArrayListEmployee)
 
 
 
+/** \brief Crea un menu de ordenamiento
+ *
+ * \param int opcion;
+ * \param int r = -1;
+ * \return r;
+ *
+ */
 int submenuSorts(LinkedList* pArrayListEmployee)
 {
     int opcion;

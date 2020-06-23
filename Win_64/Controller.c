@@ -73,7 +73,6 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
-    int tam;
     char id[20];
     char nombre[20];
     char horasTrabajadas[20];
@@ -82,9 +81,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     int todoOkNombre = 0;
     int todoOkHorasTrabajadas = 0;
     int todoOkSueldo = 0;
-    int todoOk = -1;
     int r = -1;
-    tam = ll_len(pArrayListEmployee);
     Employee* auxEmp;
 
     do
@@ -363,8 +360,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
     int r = -1;
     FILE* f;
-    int tam;
-    tam = ll_len(pArrayListEmployee);
+    int tam = ll_len(pArrayListEmployee);
     Employee* auxEmp;
 
     f = fopen(path, "wb");
@@ -381,7 +377,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
             if(auxEmp != NULL)
             {
                 fwrite(auxEmp, sizeof(Employee), 1, f);
-                r = 1;
+                r = 1;;
             }
         }
     }
